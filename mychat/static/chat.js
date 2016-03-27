@@ -33,7 +33,7 @@ var demo = new Vue({
         connect: function() {
             var self = this;
             var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-            self.chatsock = new WebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname);
+            self.chatsock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname);
             self.chatsock.onmessage = function(message) {
                 var data = JSON.parse(message.data);
                 
