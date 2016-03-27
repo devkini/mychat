@@ -39,7 +39,7 @@ def ws_receive(message):
 
         m = {
             'room': 'room',
-            'nickname': 'nick',
+            'nickname': data['nickname'],
             'text': data['text'],
         }
 

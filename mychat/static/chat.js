@@ -5,8 +5,6 @@ var demo = new Vue({
         chatsock: null,
         newMessage: '',
         messages: [
-            { text: 'hello'},
-            { text: 'world'}
         ]
     },
     ready: function() {
@@ -38,16 +36,19 @@ var demo = new Vue({
             self.chatsock = new WebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname);
             self.chatsock.onmessage = function(message) {
                 var data = JSON.parse(message.data);
+                if (data['nickname'] == self.nickname) {
+                    return;
+                } 
                 self.messages.push(data);
             }
             console.log(self.chatsock);
         },
         send: function() {
-            this.messages.push({text: this.newMessage});
             var message = {
                 nickname: this.nickname,
                 text: this.newMessage
             }
+            this.messages.push(message);
             this.chatsock.send(JSON.stringify(message));
             console.log(message);
             return false;

@@ -19,7 +19,7 @@
     {% verbatim %}
     <div id="mychat">
         <ul id="messages">
-            <li v-for="message in messages"><b>{{ nickname }}:</b> {{ message.text }}</li>
+            <li v-for="message in messages"><b>{{ message.nickname }}:</b> {{ message.text }}</li>
         </ul>
         <div class="form">
             <input v-model="newMessage" autocomplete="off" /><button v-on:click="send">Send</button>
