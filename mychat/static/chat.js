@@ -50,6 +50,11 @@ var demo = new Vue({
             console.log(self.chatsock);
         },
         send: function() {
+            if (this.chatsock.readyState == this.chatsock.CLOSED) {
+                // frontend server like nginx will close idle connection
+                // after some time.
+                this.connect();
+            }
             var message = {
                 nickname: this.nickname,
                 text: this.newMessage
